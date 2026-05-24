@@ -27,7 +27,7 @@ const typeColor: Record<string, string> = {
 }
 
 export default function ShotBoardPage() {
-  const books = [...new Set(shots.map(s => s.book))]
+  const books = shots.map(s => s.book).filter((v, i, a) => a.indexOf(v) === i)
 
   return (
     <div className="p-8 space-y-8">
@@ -52,10 +52,10 @@ export default function ShotBoardPage() {
                   <div className="font-cormorant text-sm font-semibold">{s.scene}</div>
                   <div className="text-xs text-ecru/30 mt-0.5 truncate">{s.asset}</div>
                 </div>
-                <div className={`col-span-1 text-xs ${typeColor[s.type]}`}>{s.type}</div>
+                <div className={`col-span-1 text-xs ${typeColor[s.type] || 'text-ecru/40'}`}>{s.type}</div>
                 <div className="col-span-4 text-xs text-ecru/40 font-cormorant italic">{s.notes}</div>
                 <div className="col-span-2 text-right">
-                  <span className={`px-2 py-0.5 rounded text-xs ${statusColor[s.status]}`}>{s.status}</span>
+                  <span className={`px-2 py-0.5 rounded text-xs ${statusColor[s.status] || 'bg-ecru/10 text-ecru/30'}`}>{s.status}</span>
                 </div>
               </div>
             ))}
